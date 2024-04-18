@@ -38,9 +38,9 @@ jobs:
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
-          client-id: e07f0332-f444-4a60-865d-7f0952270b9c
-          tenant-id: f3e9374e-b0b6-4973-a066-62617acbe67a
-          subscription-id: 1062deed-79a8-4c9e-9d77-31235d059b7f
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: 'Run checkout'
         uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
       - name: 'Set up Azure CLI'
         run: |
           az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          az aks get-credentials --resource-group azure-tp_group --name azure-tp --overwrite-existing
+          az aks get-credentials --resource-group iim-azure --name K8S --overwrite-existing
 
       - name: 'Build and push Docker image'
         run: |
